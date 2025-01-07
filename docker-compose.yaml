@@ -1,0 +1,35 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 12345
+      MONGO_INITDB_DATABASE: ecommerce_db
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - app-network
+
+  api-ecommerce:
+    image: walterbamac/api-ecommerce:latest
+    container_name: api-ecommerce
+    restart: always
+    ports:
+      - "8086:8086"
+    depends_on:
+      - mongodb
+    networks:
+      - app-network
+    environment:
+      URI_MONGODB: mongodb://root:12345@mongodb:27017/ecommerce_db?authSource=admin
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
