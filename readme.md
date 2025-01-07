@@ -41,8 +41,8 @@ Ejecuta el siguiente comando para iniciar los contenedores de la aplicación y M
 docker compose up -d
 ```
 
-#### **3. Despliegue**
-Ejecuta el siguiente comando para parar los contenedores de la aplicación y MongoDB:
+#### **3. Detener Servicios**
+Ejecuta el siguiente comando para detener los contenedores de la aplicación y MongoDB:
 
 ```bash
 docker compose down  --rmi all
